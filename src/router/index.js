@@ -44,9 +44,9 @@ export const constantRoutes = [
   },
 
   {
-    path: '/',
+    path: '/dashboard',
     component: Layout,
-    redirect: '/dashboard',
+    hidden: true,
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
@@ -55,6 +55,53 @@ export const constantRoutes = [
     }]
   },
 
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/chatbox',
+    children: [{
+      path: 'chatbox',
+      name: 'ChatBox',
+      component: () => import('@/views/chatbox/index'),
+      meta: { title: 'ChatBox', icon: 'dashboard' }
+    }]
+  },
+
+  {
+    path: '/administrator-panel',
+    component: Layout,
+    name: 'AdministratorPanel',
+    meta: { title: 'AdministratorPanel', icon: 'el-icon-s-help' },
+    children: [{
+      path: 'recent-access',
+      name: 'RecentAccess',
+      component: () => import('@/views/administrator-panel/recent-access/index'),
+      meta: { title: 'RecentAccess', icon: 'dashboard' }
+    },
+    {
+      path: 'violation-record',
+      name: 'ViolationRecord',
+      component: () => import('@/views/administrator-panel/violation-record/index'),
+      meta: { title: 'ViolationRecord', icon: 'dashboard' }
+    },
+    {
+      path: 'authority-management',
+      name: 'AuthorityManagement',
+      component: () => import('@/views/administrator-panel/authority-management/index'),
+      meta: { title: 'AuthorityManagement', icon: 'dashboard' }
+    }]
+  },
+  {
+    path: '/user-panel',
+    component: Layout,
+    hidden: true,
+    meta: { title: 'Home' },
+    children: [{
+      path: '/user-panel/:id',
+      name: 'UserPanel',
+      component: () => import('@/views/user-panel/index')
+    }]
+  },
   {
     path: '/example',
     component: Layout,
