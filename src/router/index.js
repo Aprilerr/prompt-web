@@ -6,6 +6,9 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 
+const user = ['user', 'admin', 'aprilies']
+const admin = ['admin', 'aprilies']
+const supAdmin = ['aprilies']
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -66,12 +69,31 @@ export const constantRoutes = [
       meta: { title: 'ChatBox', icon: 'dashboard' }
     }]
   },
+  {
+    path: '/user-panel',
+    component: Layout,
+    hidden: true,
+    meta: { title: 'Home' },
+    children: [{
+      path: '/user-panel/:id',
+      name: 'UserPanel',
+      component: () => import('@/views/user-panel/index')
+    }]
+  },
+  // 404 page must be placed at the end !!!
+  { path: '*', redirect: '/404', hidden: true }
+]
 
+export const asyncRoutes = [
   {
     path: '/administrator-panel',
     component: Layout,
     name: 'AdministratorPanel',
-    meta: { title: 'AdministratorPanel', icon: 'el-icon-s-help' },
+    meta: {
+      title: 'AdministratorPanel',
+      icon: 'el-icon-s-help',
+      roles: admin
+    },
     children: [{
       path: 'recent-access',
       name: 'RecentAccess',
@@ -92,22 +114,11 @@ export const constantRoutes = [
     }]
   },
   {
-    path: '/user-panel',
-    component: Layout,
-    hidden: true,
-    meta: { title: 'Home' },
-    children: [{
-      path: '/user-panel/:id',
-      name: 'UserPanel',
-      component: () => import('@/views/user-panel/index')
-    }]
-  },
-  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    meta: { title: 'Example', icon: 'el-icon-s-help', roles: supAdmin },
     children: [
       {
         path: 'table',
@@ -127,6 +138,7 @@ export const constantRoutes = [
   {
     path: '/form',
     component: Layout,
+    meta: { roles: supAdmin },
     children: [
       {
         path: 'index',
@@ -144,7 +156,8 @@ export const constantRoutes = [
     name: 'Nested',
     meta: {
       title: 'Nested',
-      icon: 'nested'
+      icon: 'nested',
+      roles: supAdmin
     },
     children: [
       {
@@ -202,13 +215,10 @@ export const constantRoutes = [
     children: [
       {
         path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        meta: { title: 'External Link', icon: 'link', roles: supAdmin }
       }
     ]
-  },
-
-  // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  }
 ]
 
 const createRouter = () => new Router({
