@@ -36,7 +36,9 @@ const actions = {
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
+      // 对 password 进行加密处理
       login({ username: username.trim(), password: password }).then(response => {
+        console.log('response:', response)
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
@@ -58,8 +60,9 @@ const actions = {
           return reject('Verification failed, please Login again.')
         }
 
-        const { name, avatar, roles } = data
-        console.log('name:', name, '\navatar:', avatar, '\nrole', roles)
+        const { name, avatar, role } = data
+        let roles = role
+        console.log('name:', name, '\navatar:', avatar, '\nroles:', roles)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
         commit('SET_ROLE', roles)

@@ -1,8 +1,9 @@
 import request from '@/utils/request'
+import url_env from './config'
 
 export function getList(params) {
   return request({
-    url: '/vue-admin-template/table/list',
+    url: url_env + '/table/list',
     method: 'get',
     params
   })
