@@ -7,7 +7,7 @@ const getDefaultState = () => {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: []
+    roles: ''
   }
 }
 
@@ -38,7 +38,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       // 对 password 进行加密处理
       login({ username: username.trim(), password: password }).then(response => {
-        console.log('response:', response)
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
@@ -53,7 +52,6 @@ const actions = {
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
-        console.log('response:', response)
         const { data } = response
 
         if (!data) {
@@ -61,10 +59,17 @@ const actions = {
         }
 
         const { name, avatar, role } = data
-        let roles = role
-        console.log('name:', name, '\navatar:', avatar, '\nroles:', roles)
+        const roles = role
+        console.log('avatar1:', avatar)
+        const prefix = '@/assets/avatar_images/'
+        // check avatar is null
+        if (avatar == null) {
+          commit('SET_AVATAR', 'default.png')
+          console.log('avatar2:', 1)
+        }else{
+          commit('SET_AVATAR', avatar)
+        }
         commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
         commit('SET_ROLE', roles)
         resolve(data)
       }).catch(error => {

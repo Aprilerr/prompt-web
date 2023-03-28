@@ -79,9 +79,7 @@ export const constantRoutes = [
       name: 'UserPanel',
       component: () => import('@/views/user-panel/index')
     }]
-  },
-  // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  }
 ]
 
 export const asyncRoutes = [
@@ -131,6 +129,12 @@ export const asyncRoutes = [
         name: 'Tree',
         component: () => import('@/views/tree/index'),
         meta: { title: 'Tree', icon: 'tree' }
+      },
+      {
+        path: 'gradio',
+        name: 'Gradio',
+        component: () => import('@/views/example/gradio/index'),
+        meta: { title: 'Gradio', icon: 'tree' }
       }
     ]
   },
@@ -220,6 +224,9 @@ export const asyncRoutes = [
     ]
   }
 ]
+
+// 404 page must be placed at the end !!!
+export const error404 = { path: '*', redirect: '/404', hidden: true }
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
