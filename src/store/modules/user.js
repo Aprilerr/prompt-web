@@ -7,7 +7,7 @@ const getDefaultState = () => {
     token: getToken(),
     name: '',
     avatar: '',
-    role: ''
+    roles: ''
   }
 }
 
@@ -26,8 +26,8 @@ const mutations = {
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
   },
-  SET_ROLE: (state, role) => {
-    state.role = role
+  SET_ROLE: (state, roles) => {
+    state.roles = roles
   }
 }
 
@@ -59,10 +59,17 @@ const actions = {
         }
 
         const { name, avatar, role } = data
-        console.log('name:', name, '\navatar:', avatar, '\nroles:', role)
+        const roles = role
+        console.log('avatar1:', avatar)
+        // check avatar is null
+        if (avatar == null) {
+          commit('SET_AVATAR', 'default.png')
+          console.log('avatar2:', 1)
+        } else {
+          commit('SET_AVATAR', avatar)
+        }
         commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        commit('SET_ROLE', role)
+        commit('SET_ROLE', roles)
         resolve(data)
       }).catch(error => {
         reject(error)

@@ -1,7 +1,8 @@
 <template>
   <div style="padding: 100px; display: flex;flex-wrap: wrap" class="app-container">
     <div :style="{zIndex:zIndex,height:height,width:width}" class="avatar-container">
-      <div :style="{backgroundImage: `url(${avatar})`}" class="avatar-image"></div>
+      <!-- <div :style="{backgroundImage: `url(${avatar})`}" class="avatar-image"></div> -->
+      <img :src=avatar class="avatar-image" />
     </div>
     <div class="text-container">
       <div style="display: block;" class="text-content">
@@ -51,7 +52,7 @@ export default {
   },
   computed: {
     avatar() {
-      return this.$store.getters.avatar
+      return require('@/assets/avatar_images/' + this.$store.getters.avatar)
     },
     name() {
       return this.$store.getters.name
@@ -59,6 +60,8 @@ export default {
     roles() {
       return this.$store.getters.roles
     }
+  },
+  created() {
   }
 }
 </script>

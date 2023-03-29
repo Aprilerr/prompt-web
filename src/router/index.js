@@ -6,7 +6,7 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 
-const user = ['user', 'admin', 'aprilies']
+// const user = ['user', 'admin', 'aprilies']
 const admin = ['admin', 'aprilies']
 const supAdmin = ['aprilies']
 /**
@@ -79,9 +79,7 @@ export const constantRoutes = [
       name: 'UserPanel',
       component: () => import('@/views/user-panel/index')
     }]
-  },
-  // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  }
 ]
 
 export const asyncRoutes = [
@@ -135,7 +133,7 @@ export const asyncRoutes = [
       {
         path: 'gradio',
         name: 'Gradio',
-        component: () => import('@/views/example/gradio-one/index'),
+        component: () => import('@/views/example/gradio/index'),
         meta: { title: 'Gradio', icon: 'tree' }
       }
     ]
@@ -226,6 +224,9 @@ export const asyncRoutes = [
     ]
   }
 ]
+
+// 404 page must be placed at the end !!!
+export const error404 = { path: '*', redirect: '/404', hidden: true }
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support

@@ -1,4 +1,4 @@
-import router from './router'
+import router, { error404 } from './router'
 import store from './store'
 import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
@@ -28,24 +28,28 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      const hasRoles = store.getters.role && store.getters.role.length > 0
+      const hasRoles = store.getters.roles && store.getters.roles.length > 0
       if (hasRoles) {
         next()
       } else {
         try {
           // get user info
           const { role } = await store.dispatch('user/getInfo')
-
+          const roles = role
           // get accessible routes based on roles
-          const accessRoutes = await store.dispatch('permission/generateRoutes', role)
-
+          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
           // dynamically add accessible routes
-          router.addRoutes(accessRoutes)
-          next({ ...to, replace: true })
+          router.addRoutes([...accessRoutes, error404])
+          if (to.redirectedFrom) {
+            router.replace(to.redirectedFrom)
+          } else {
+            next({ ...to, replace: true })
+          }
+          next({ ...to })
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')
-          // Message.error(error || 'Has Error')
+          Message.error(error || 'Has Error')
           next(`/login?redirect=${to.path}`)
           NProgress.done()
         }
