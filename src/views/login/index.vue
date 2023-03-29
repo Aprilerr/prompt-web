@@ -109,7 +109,7 @@ export default {
       this.$store.dispatch('user/login', this.loginForm).then(() => {
         this.$router.push({ path: this.redirect })
       }).catch(err => {
-        this.$message.error(err)
+        this.$log.debug('login error: ', err.message)
       })
       // this.$refs.loginForm.validate(valid => {
       //   if (valid) {

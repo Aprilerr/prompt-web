@@ -7,7 +7,7 @@ const getDefaultState = () => {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: []
+    role: ''
   }
 }
 
@@ -26,8 +26,8 @@ const mutations = {
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
   },
-  SET_ROLE: (state, roles) => {
-    state.roles = roles
+  SET_ROLE: (state, role) => {
+    state.role = role
   }
 }
 
@@ -38,7 +38,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       // 对 password 进行加密处理
       login({ username: username.trim(), password: password }).then(response => {
-        console.log('response:', response)
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
@@ -53,7 +52,6 @@ const actions = {
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
-        console.log('response:', response)
         const { data } = response
 
         if (!data) {
@@ -61,11 +59,10 @@ const actions = {
         }
 
         const { name, avatar, role } = data
-        let roles = role
-        console.log('name:', name, '\navatar:', avatar, '\nroles:', roles)
+        console.log('name:', name, '\navatar:', avatar, '\nroles:', role)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
-        commit('SET_ROLE', roles)
+        commit('SET_ROLE', role)
         resolve(data)
       }).catch(error => {
         reject(error)

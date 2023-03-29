@@ -59,9 +59,6 @@ export default {
     roles() {
       return this.$store.getters.roles
     }
-  },
-  created() {
-    console.log('user-panel:', this.$store.getters)
   }
 }
 </script>

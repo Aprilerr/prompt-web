@@ -39,7 +39,9 @@ Vue.use(ElementUI, { locale })
 Vue.use(VueLogger, { options })
 
 Vue.config.productionTip = false
-
+Vue.config.ignoredElements = [
+  'gradio-app'
+]
 new Vue({
   el: '#app',
   router,
