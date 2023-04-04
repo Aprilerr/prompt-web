@@ -135,6 +135,12 @@ export const asyncRoutes = [
         name: 'Gradio',
         component: () => import('@/views/example/gradio/index'),
         meta: { title: 'Gradio', icon: 'tree' }
+      },
+      {
+        path: 'langflow',
+        name: 'Langflow',
+        component: () => import('@/views/example/langflow/index'),
+        meta: { title: 'Langflow', icon: 'tree' }
       }
     ]
   },
