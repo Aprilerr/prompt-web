@@ -61,12 +61,13 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/chatbox',
+    name: 'ChatBox',
+    meta: { title: 'ChatBox', icon: 'dashboard' },
     children: [{
-      path: 'chatbox',
-      name: 'ChatBox',
-      component: () => import('@/views/chatbox/index'),
-      meta: { title: 'ChatBox', icon: 'dashboard' }
+      path: 'summary-generation',
+      name: 'Summary Generation',
+      component: () => import('@/views/chatbox/summary_generation/index'),
+      meta: { title: 'Summary Generation', icon: 'dashboard' }
     }]
   },
   {
