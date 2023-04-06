@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <iframe src="http://127.0.0.1:8090?__theme=light" id="myiframe" style="height: 100%;width: 100%" frameborder="0" scrolling="no"></iframe>
+    <iframe src="http://172.104.109.175:8090?__theme=light" id="myiframe" style="height: 100%;width: 100%" frameborder="0" scrolling="no"></iframe>
   </div>
 </template>
 

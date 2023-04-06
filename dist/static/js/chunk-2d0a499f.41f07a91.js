@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0a499f"],{"06ad":function(n,e,t){"use strict";t.r(e);var a=function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("div")},u=[],c={name:"AuthorityManagement"},l=c,r=t("2877"),i=Object(r["a"])(l,a,u,!1,null,null,null);e["default"]=i.exports}}]);
