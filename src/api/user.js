@@ -1,9 +1,8 @@
 import request from '@/utils/request'
-import url_env from './config'
 
 export function login(data) {
   return request({
-    url: url_env + '/user/login',
+    url: process.env.VUE_APP_BASE_API + process.env.VUE_APP_BACKEND_PORT + '/user/login',
     method: 'post',
     data
   })
@@ -11,7 +10,7 @@ export function login(data) {
 
 export function getInfo(token) {
   return request({
-    url: url_env + '/user/info',
+    url: process.env.VUE_APP_BASE_API + process.env.VUE_APP_BACKEND_PORT + '/user/info',
     method: 'get',
     params: { token }
   })
@@ -19,7 +18,7 @@ export function getInfo(token) {
 
 export function logout() {
   return request({
-    url: url_env + '/user/logout',
+    url: process.env.VUE_APP_BASE_API + process.env.VUE_APP_BACKEND_PORT + '/user/logout',
     method: 'get'
   })
 }

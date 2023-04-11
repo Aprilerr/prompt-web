@@ -3,7 +3,7 @@ import url_env from './config'
 
 export function getList(params) {
   return request({
-    url: url_env + '/table/list',
+    url: process.env.VUE_APP_BACKEND_PORT + '/table/list',
     method: 'get',
     params
   })
